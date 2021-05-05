@@ -1,0 +1,21 @@
+### User sing up endpoint
+POST http://localhost:3001/v1/user
+Content-Type: application/json
+
+{
+    "name": "Sergio Perez",
+    "company": "Red Bull Racing",
+    "address": "Guadalajara - Mexico",
+    "phone": "3794-1234456",
+    "email": "checo11@redbull.com",
+    "password": "123456"
+}
+
+### User sing in endpoint
+POST http://localhost:3001/v1/user/login
+Content-Type: application/json
+
+{
+    "email": "checo11@redbull.com",
+    "password": "123456"
+}

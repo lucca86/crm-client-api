@@ -3,13 +3,13 @@ require('dotenv').config();
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const helmet = require('helmet');
+//const helmet = require('helmet');
 const morgan = require('morgan');
 const port = process.env.PORT || 3001
 
 
 // API security
-app.use(helmet());
+//app.use(helmet());
 
 // handle CORS error
 app.use(cors());

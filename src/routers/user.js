@@ -57,16 +57,14 @@ router.post('/login', async (req, res) => {
     if(!passFromDb) 
         return res.json({ status: 'error', message: 'Invalid email or password!'});
    
-
     const result = await comparePassword(password, passFromDb);
 
     if(!result) {
-        return res.json({ status: 'error', message: 'Invalid email or password!'});
-        
+        return res.json({ status: 'error', message: 'Invalid email or password!'});    
     }
     
-    const accessJWT = await createAccessJWT(user.email);
-    const refreshJWT = await createRefreshJWT(user.email);
+    const accessJWT = await createAccessJWT(user.email, `${user._id}`);
+    const refreshJWT = await createRefreshJWT(user.email, `${user._id}`);
     console.log(result);
 
     res.json({ status: 'success', message: 'Login successfully!', accessJWT, refreshJWT} )

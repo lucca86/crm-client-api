@@ -1,9 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-const {insertUser, getUserByEmail} = require('../model/user/User.model');
+const {insertUser, getUserByEmail, getUserById} = require('../model/user/User.model');
 const {hashPassword, comparePassword} = require('../helpers/bcrypt.helper');
 const {createAccessJWT, createRefreshJWT } = require('../helpers/jwt.helper');
+const {userAuthorization} = require('../middlewares/authorization.middleware');
+
+
 router.all("/", (req, res, next) => {
     // res.json({
     //     message: 'Return from user router'
@@ -69,6 +72,20 @@ router.post('/login', async (req, res) => {
 
     res.json({ status: 'success', message: 'Login successfully!', accessJWT, refreshJWT} )
 }); 
+
+
+// Get user profile router
+router.get('/', userAuthorization, async (req, res) => {
+
+    // this data coming from database
+    const _id = req.userId
+
+    const userProf = await getUserById(_id)
+    // 3. extract user id
+    // 4. get user profile based on the user id
+
+    res.json({ user: userProf })
+});
 
 
 

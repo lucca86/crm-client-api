@@ -19,3 +19,12 @@ Content-Type: application/json
     "email": "checo11@redbull.com",
     "password": "123456"
 }
+
+### Get a user profile endpoint
+GET http://localhost:3001/v1/user
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVkYnVsbC5jb20iLCJpYXQiOjE2MjA1NTk2MTMsImV4cCI6MTYyMDU2MDUxM30.S_MJaOvd6mmMmzQwVF-5swmgbv8I6w0-c1pInVF5EtE
+
+{
+    "email": "checo11@redbull.com",
+    "password": "123456"
+}

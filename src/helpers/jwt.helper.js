@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { setJWT, getJWT} = require('./redis.helper');
 const {storeUserRefreshJWT} = require('../model/user/User.model');
+const { PromiseProvider } = require('mongoose');
 
 const createAccessJWT = async (email, _id) => {
 
@@ -27,7 +28,20 @@ const createRefreshJWT = async (email, _id) => {
     }
 };
 
+
+const verifyAccessJWT = (userJWT) => {
+
+    try {
+        return Promise.resolve(
+            jwt.verify(userJWT, process.env.JWT_ACCESS_SECRET)
+        )
+    } catch (error) {
+        return Promise.reject(error)
+    }
+};
+
 module.exports = {
     createAccessJWT,
     createRefreshJWT,
+    verifyAccessJWT,
 }

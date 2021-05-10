@@ -22,9 +22,17 @@ Content-Type: application/json
 
 ### Get a user profile endpoint
 GET http://localhost:3001/v1/user
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVkYnVsbC5jb20iLCJpYXQiOjE2MjA1NTk2MTMsImV4cCI6MTYyMDU2MDUxM30.S_MJaOvd6mmMmzQwVF-5swmgbv8I6w0-c1pInVF5EtE
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVkYnVsbC5jb20iLCJpYXQiOjE2MjA2NTQ3NjQsImV4cCI6MTYyMDY1NTY2NH0.D69GKeUIuu5z7k9JQCTtfkqwYUt7q5fogmbUn5xPyqA
 
 {
     "email": "checo11@redbull.com",
     "password": "123456"
 }
+
+
+### Token routers
+
+
+### Get refreshed token
+GET http://localhost:3001/v1/tokens
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVkYnVsbC5jb20iLCJpYXQiOjE2MjA1OTQxNTMsImV4cCI6MTYyMzE4NjE1M30.9JuG7-jjEUczkeVsnN2Nx4UKt6T_1oZAKjXiXpBRyT0

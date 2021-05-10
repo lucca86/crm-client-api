@@ -36,3 +36,11 @@ authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVk
 ### Get refreshed token
 GET http://localhost:3001/v1/tokens
 authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVkYnVsbC5jb20iLCJpYXQiOjE2MjA1OTQxNTMsImV4cCI6MTYyMzE4NjE1M30.9JuG7-jjEUczkeVsnN2Nx4UKt6T_1oZAKjXiXpBRyT0
+
+### password reset endpoints
+POST http://localhost:3001/v1/user/reset-password
+Content-Type: application/json
+
+{
+    "email": "checo11@redbull.com"
+}

@@ -17,12 +17,12 @@ Content-Type: application/json
 
 {
     "email": "checo11@redbull.com",
-    "password": "123456"
+    "password": "12345678"
 }
 
 ### Get a user profile endpoint
 GET http://localhost:3001/v1/user
-authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVkYnVsbC5jb20iLCJpYXQiOjE2MjA2NTQ3NjQsImV4cCI6MTYyMDY1NTY2NH0.D69GKeUIuu5z7k9JQCTtfkqwYUt7q5fogmbUn5xPyqA
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVkYnVsbC5jb20iLCJpYXQiOjE2MjA5MTkyMzYsImV4cCI6MTYyMDkyMDEzNn0.-E-Krbz-q8ZzxdeNqhFFBOgPZRU2aNRL4X0PO17ZPKo
 
 {
     "email": "checo11@redbull.com",
@@ -35,12 +35,22 @@ authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVk
 
 ### Get refreshed token
 GET http://localhost:3001/v1/tokens
-authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVkYnVsbC5jb20iLCJpYXQiOjE2MjA1OTQxNTMsImV4cCI6MTYyMzE4NjE1M30.9JuG7-jjEUczkeVsnN2Nx4UKt6T_1oZAKjXiXpBRyT0
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVkYnVsbC5jb20iLCJpYXQiOjE2MjA5MTkyNzIsImV4cCI6MTYyMDkyMDE3Mn0.zwp7UGcURHntgMiGomTIWqEq-3MX7SiJMdOqiGqulHs
 
-### password reset endpoints
+### password reset request endpoints
 POST http://localhost:3001/v1/user/reset-password
 Content-Type: application/json
 
 {
     "email": "checo11@redbull.com"
+}
+
+### Update new password endpoints
+PATCH http://localhost:3001/v1/user/reset-password
+Content-Type: application/json
+
+{
+    "email": "checo11@redbull.com",
+    "pin": "681914",
+    "newPassword": "12345678"
 }

@@ -4,8 +4,8 @@ const transporter = nodemailer.createTransport({
     host: 'smtp.ethereal.email',
     port: 587,
     auth: {
-        user: 'cassie.rohan@ethereal.email',
-        pass: '6nQ73b6S41vvgJ26RC'
+        user: 'dedrick18@ethereal.email',
+        pass: 'XZk2BgRz84x1Vxp8ws'
     }
 });  
 
@@ -29,28 +29,49 @@ const send =  (info) => {
             console.log(error);
         }
     })
-    
-
-
 
 };
 
 
 
-const emailProcessor = (email, pin) => {
-    const info = {
-        from: '"Luccas CRM" <cassie.rohan@ethereal.email>', // sender address
-        to: email, // list of receivers
-        subject: "Password reset pin", // Subject line
-        text: "Here is your password reset Pin" + pin + "this pin will expires in 1 day", // plain text body
-        html: `<b>Hello</b>
-        Here is you PIN
-        <b>${pin}</b>
-        This PIN will expires in 1 day
-        `, // html body
+const emailProcessor = ({email, pin, type}) => {
+
+    let info = '';
+
+    switch (type) {
+        case "request-new-password":
+            info = {
+                from: '"Luccas CRM" <dedrick18@ethereal.email>', // sender address
+                to: email, // list of receivers
+                subject: "Password reset pin", // Subject line
+                text: "Here is your password reset Pin" + pin + "this pin will expires in 1 day", // plain text body
+                html: `<b>Hello</b>
+                Here is you PIN
+                <b>${pin}</b>
+                This PIN will expires in 1 day
+                `, // html body
+            };
+
+            send(info);
+            break;
+
+        case "update-password-success":
+            info = {
+                from: '"Luccas CRM" <dedrick18@ethereal.email>', // sender address
+                to: email, // list of receivers
+                subject: "Password updated", // Subject line
+                text: "Your new password has ben update", // plain text body
+                html: `<b>Hello</b>
+                <p>Your new password has been update</p>
+                `, // html body
+            };
+
+            send(info);
+            break;
+        default:
+            break;
     }
 
-    send(info, )
 };
 
 module.exports = {

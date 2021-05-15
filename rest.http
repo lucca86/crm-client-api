@@ -51,6 +51,6 @@ Content-Type: application/json
 
 {
     "email": "checo11@redbull.com",
-    "pin": "681914",
+    "pin": 576189,
     "newPassword": "12345678"
 }

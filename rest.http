@@ -1,3 +1,4 @@
+############ USER #######################
 ### User sing up endpoint
 POST http://localhost:3001/v1/user
 Content-Type: application/json
@@ -11,7 +12,7 @@ Content-Type: application/json
     "password": "123456"
 }
 
-### User sing in endpoint
+### User sing in endpoint (Nuevo Token)
 POST http://localhost:3001/v1/user/login
 Content-Type: application/json
 
@@ -30,7 +31,7 @@ authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVk
 }
 
 
-### Token routers
+############### Token routers #######################
 
 
 ### Get refreshed token
@@ -57,5 +58,28 @@ Content-Type: application/json
 
 ### User logout endpoint
 DELETE http://localhost:3001/v1/user/logout
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVkYnVsbC5jb20iLCJpYXQiOjE2MjEwOTE2ODMsImV4cCI6MTYyMTA5MjU4M30.F7TcrWnUgTV00JcbWAxJZ_AATuWg7oYPyVmvTCqPxYM
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVkYnVsbC5jb20iLCJpYXQiOjE2MjEwOTE5MzMsImV4cCI6MTYyMTA5MjgzM30.0y-Iqz0NxuYMG-P6hy_7uQXKeQPe9MkVYNZts-9iyy8
+
+
+############ TICKETS #######################
+
+POST http://localhost:3001/v1/ticket
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVkYnVsbC5jb20iLCJpYXQiOjE2MjE1MTIwMjAsImV4cCI6MTYyMTUxMjkyMH0.9Npa3mKA_mHOshugOcLt-gKy4yYEp3zWyKuUQSGG14Y
+
+{
+    "subject": "Form Issue",
+    "sender": "Lewis",
+    "message": "Contact form not working. Please fix it as soon as posible"
+}
+
+
+### Get all tickets
+GET http://localhost:3001/v1/ticket/60a3e56608742a3c58de2635
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVkYnVsbC5jb20iLCJpYXQiOjE2MjE1MTIwMjAsImV4cCI6MTYyMTUxMjkyMH0.9Npa3mKA_mHOshugOcLt-gKy4yYEp3zWyKuUQSGG14Y
+
+
+### Get ticket by Id
+GET http://localhost:3001/v1/ticket/60a417102043e220cc06dccb
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVkYnVsbC5jb20iLCJpYXQiOjE2MjE1MTIwMjAsImV4cCI6MTYyMTUxMjkyMH0.9Npa3mKA_mHOshugOcLt-gKy4yYEp3zWyKuUQSGG14Y
 

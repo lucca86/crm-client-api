@@ -100,7 +100,7 @@ authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVk
 
 
 ### Delete ticket 
-PATCH  http://localhost:3001/v1/ticket/60a8fa69c4c7ef3dc83e87d9
+DELETE  http://localhost:3001/v1/ticket/60a8fa69c4c7ef3dc83e87d9
 authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVkYnVsbC5jb20iLCJpYXQiOjE2MjE3MTYyMzcsImV4cCI6MTYyMTcxNzEzN30.YVbY7arpKANn-sNtqU08Flqlka_XT7EyNhjMqqVedxk
 
 

@@ -65,7 +65,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVk
 
 POST http://localhost:3001/v1/ticket
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVkYnVsbC5jb20iLCJpYXQiOjE2MjE1MTIwMjAsImV4cCI6MTYyMTUxMjkyMH0.9Npa3mKA_mHOshugOcLt-gKy4yYEp3zWyKuUQSGG14Y
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVkYnVsbC5jb20iLCJpYXQiOjE2MjE2ODY3NTksImV4cCI6MTYyMTY4NzY1OX0.XV_cFzsM2PG_tabPmvhLNye9wpQJsBw3ReutcVuGHMw
 
 {
     "subject": "Form Issue",
@@ -75,11 +75,32 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVk
 
 
 ### Get all tickets
-GET http://localhost:3001/v1/ticket/60a3e56608742a3c58de2635
-authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVkYnVsbC5jb20iLCJpYXQiOjE2MjE1MTIwMjAsImV4cCI6MTYyMTUxMjkyMH0.9Npa3mKA_mHOshugOcLt-gKy4yYEp3zWyKuUQSGG14Y
+GET http://localhost:3001/v1/ticket/609405b450140323f4e09939
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVkYnVsbC5jb20iLCJpYXQiOjE2MjE1MTU2NDEsImV4cCI6MTYyMTUxNjU0MX0.RhdkS34_vemOi8qLyanK7CH312Xcqv3HsQcy9e-u_3g
 
 
 ### Get ticket by Id
-GET http://localhost:3001/v1/ticket/60a417102043e220cc06dccb
-authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVkYnVsbC5jb20iLCJpYXQiOjE2MjE1MTIwMjAsImV4cCI6MTYyMTUxMjkyMH0.9Npa3mKA_mHOshugOcLt-gKy4yYEp3zWyKuUQSGG14Y
+GET http://localhost:3001/v1/ticket/609405b450140323f4e09939
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVkYnVsbC5jb20iLCJpYXQiOjE2MjE2ODY3NTksImV4cCI6MTYyMTY4NzY1OX0.XV_cFzsM2PG_tabPmvhLNye9wpQJsBw3ReutcVuGHMw
+
+
+
+### Update 
+PUT http://localhost:3001/v1/ticket/609405b450140323f4e09939
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVkYnVsbC5jb20iLCJpYXQiOjE2MjE2ODY3NTksImV4cCI6MTYyMTY4NzY1OX0.XV_cFzsM2PG_tabPmvhLNye9wpQJsBw3ReutcVuGHMw
+
+{
+    "message": "How is the fixing process. Please update me asap",
+    "sender": "Lucca"
+}
+
+### Close the ticket 
+PATCH  http://localhost:3001/v1/ticket/close-ticket/60a8fa69c4c7ef3dc83e87d9
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVkYnVsbC5jb20iLCJpYXQiOjE2MjE3MTYyMzcsImV4cCI6MTYyMTcxNzEzN30.YVbY7arpKANn-sNtqU08Flqlka_XT7EyNhjMqqVedxk
+
+
+### Delete ticket 
+PATCH  http://localhost:3001/v1/ticket/60a8fa69c4c7ef3dc83e87d9
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVkYnVsbC5jb20iLCJpYXQiOjE2MjE3MTYyMzcsImV4cCI6MTYyMTcxNzEzN30.YVbY7arpKANn-sNtqU08Flqlka_XT7EyNhjMqqVedxk
+
 

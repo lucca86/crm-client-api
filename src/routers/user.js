@@ -1,15 +1,16 @@
 const express = require('express');
 const router = express.Router();
 
-const {insertUser, getUserByEmail, getUserById, updatedPassword, storeUserRefreshJWT} = require('../model/user/User.model');
+const {insertUser, getUserByEmail, getUserById, updatedPassword, storeUserRefreshJWT, verifyUser} = require('../model/user/User.model');
 const {setPasswordResetPin, getPinByEmailPin, deletePin} = require('../model/resetPin/ResetPin.model');
 const {hashPassword, comparePassword} = require('../helpers/bcrypt.helper');
 const {createAccessJWT, createRefreshJWT } = require('../helpers/jwt.helper');
 const {userAuthorization} = require('../middlewares/authorization.middleware');
 const { emailProcessor } = require('../helpers/email.helper');
-const { resetPassReqValidation, updatePassValidation } = require('../middlewares/formValidation.middleware');
+const { resetPassReqValidation, updatePassValidation, newUserValidation } = require('../middlewares/formValidation.middleware');
 const { deleteJWT } = require('../helpers/redis.helper');
 
+const verificationURL= 'http://localhost:3000/verification/';
 
 router.all("/", (req, res, next) => {
     // res.json({
@@ -20,9 +21,9 @@ router.all("/", (req, res, next) => {
 });
 
 // ****  Create new user route ****
-router.post('/', async (req, res) => {
+router.post('/', newUserValidation, async (req, res) => {
 
-    const {name, company, address, phone, email, password} = req.body;
+    const {name, lastName, company, address, phone, email, password} = req.body;
 
     try {
         // hash password
@@ -30,6 +31,7 @@ router.post('/', async (req, res) => {
 
         const newUserObject = {
             name, 
+            lastName,
             company, 
             address, 
             phone, 
@@ -39,12 +41,22 @@ router.post('/', async (req, res) => {
 
         const result = await insertUser(newUserObject);
         console.log(result);
-    
-        res.json({ message: 'New user created', result });
+        // Send the confirmation email
+        await emailProcessor(
+            {email, 
+            type: "new-user-confirmation-required",
+            verificationLink: verificationURL + result._id + '/' + email,
+        });
+
+        res.json({ status: "success", message: 'New user created', result });
         
     } catch (error) {
         console.log(error);
-        res.json({ status: 'error', message: error.message });    
+        let message = "Unable to create new user al the moment, please try again or contact to the administrator"
+        if(error.message.includes("E11000 duplicate key error collection")){
+            message: "This email already has an account"
+        }
+        res.json({ status: 'error', message });    
     }
 });
 
@@ -59,6 +71,10 @@ router.post('/login', async (req, res) => {
     
     
     const user = await getUserByEmail(email);
+    // if(!user.isVerified){
+    //     return res.json({ status: 'error', message: 'Your account has not been verified. Plase check your email and verify your account before hable to login'});
+    // }
+
     const passFromDb = user && user._id ? user.password : null;
 
     if(!passFromDb) 
@@ -85,9 +101,36 @@ router.get('/', userAuthorization, async (req, res) => {
     const _id = req.userId
 
     const userProf = await getUserById(_id)
-
-    res.json({ user: userProf })
+    const {name, email} = userProf;
+    res.json({ 
+        user: {
+            _id,
+            name,
+            email
+    },
+  });
 });
+
+// Verify user after user is sign up
+router.patch('/verify', async(req, res) => {
+    try {
+        const {_id, email} = req.body;
+    
+        // update our user database
+        const result = await verifyUser(_id, email);
+    
+        if(result && result.id) {
+            return res.json({status: 'success', message: 'Your account has benn activated, you may sign in now!'})
+        }
+
+        return res.json({status: 'error', message: 'Invalid request!'})
+
+        
+    } catch (error) {
+        console.log(error);
+        return res.json({status: 'error', message: 'Invalid request!'})
+    }
+}); 
 
 /* 
     A. Create ans send password reset pin number
@@ -135,7 +178,7 @@ router.patch('/reset-password', updatePassValidation, async (req, res) => {
 
     const getPin = await getPinByEmailPin(email, pin);
 
-    if(getPin._id) {
+    if(getPin?._id) {
         const dbDate = getPin.addedAt;
         const expiresIn = 1;
         

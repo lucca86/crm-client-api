@@ -1,3 +1,4 @@
+const { number } = require('joi');
 const Joi = require('joi');
 
 const email = Joi.string()
@@ -5,16 +6,17 @@ const email = Joi.string()
                           tlds: { allow: ['com', 'net'] } 
                         });
 
-const pin = Joi.number().min(6).max(6).required()            
+const pin = Joi.number().min(10000).max(999999).required();
+const phone = Joi.number().max(10);          
 
-const newPassword = Joi.string()
-                        .alphanum()
-                        .min(6)
-                        .max(6)
-                        .required()
+// const newPassword = Joi.string()
+//                         .min(6)
+//                         .max(6)
+//                         .required()
 
-const shortStr = Joi.string().min(2).max(50)
-const longStr = Joi.string().min(2).max(1000)
+const shortStr = Joi.string().min(2).max(50);
+const longStr = Joi.string().min(2).max(1000);
+const dt = Joi.date();
 
 const resetPassReqValidation = (req, res, next) => { 
     const schema = Joi.object({email});
@@ -41,13 +43,14 @@ const createNewTicketValidation = (req, res, next) => {
     const schema = Joi.object({
         subject: shortStr.required(),
         sender: shortStr.required(),
-        message: longStr.required()
+        message: longStr.required(),
+        issueDate: dt.required()
     })
 
     const value = schema.validate(req.body);
 
     if(value.error){
-        return res.json({ status: "error", message:"value.error.message"});
+        return res.json({ status: "error", message: value.error.message});
     }
 
     next();
@@ -60,19 +63,37 @@ const replyTicketMessageValidation = (req, res, next) => {
         sender: shortStr.required(),
         message: longStr.required()
     })
-
     const value = schema.validate(req.body);
-
     if(value.error){
-        return res.json({ status: "error", message:"value.error.message"});
+        return res.json({ status: "error", message: value.error.message});
     }
-
     next();
 };
+
+
+const newUserValidation = (req, res, next) => {
+    const schema = Joi.object({
+        name: shortStr.required(), 
+        lastName: shortStr.required(),
+        company: shortStr.required(), 
+        address: longStr.required(), 
+        phone: shortStr.required(), 
+        email: shortStr.required(), 
+        password: shortStr.required()
+    })
+    const value = schema.validate(req.body);
+    if(value.error){
+        return res.json({ status: "error", message: value.error.message});
+    }
+    next();
+};
+
+
 
 module.exports = {
     resetPassReqValidation,
     updatePassValidation,
     createNewTicketValidation,
-    replyTicketMessageValidation
+    replyTicketMessageValidation,
+    newUserValidation
 }

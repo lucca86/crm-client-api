@@ -4,8 +4,8 @@ const transporter = nodemailer.createTransport({
     host: 'smtp.ethereal.email',
     port: 587,
     auth: {
-        user: 'dedrick18@ethereal.email',
-        pass: 'XZk2BgRz84x1Vxp8ws'
+        user: 'tyreek.sporer42@ethereal.email',
+        pass: 'u4MfdQzA9nNkTkt8MS'
     }
 });  
 
@@ -34,10 +34,8 @@ const send =  (info) => {
 
 
 
-const emailProcessor = ({email, pin, type}) => {
-
+const emailProcessor = ({email, pin, type, verificationLink=''}) => {
     let info = '';
-
     switch (type) {
         case "request-new-password":
             info = {
@@ -63,6 +61,20 @@ const emailProcessor = ({email, pin, type}) => {
                 text: "Your new password has ben update", // plain text body
                 html: `<b>Hello</b>
                 <p>Your new password has been update</p>
+                `, // html body
+            };
+            send(info);
+            break;
+
+        case "new-user-confirmation-required":
+            info = {
+                from: '"Luccas CRM" <dedrick18@ethereal.email>', // sender address
+                to: email, // list of receivers
+                subject: "Please verify your new user", // Subject line
+                text: "Please follow the link to verify your account before you cant login", // plain text body
+                html: `<b>Hello</b>
+                <p>Please follow the link to verify your account before you cant login</p>
+                <p>${verificationLink}</p>
                 `, // html body
             };
 

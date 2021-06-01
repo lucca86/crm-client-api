@@ -4,7 +4,8 @@ POST http://localhost:3001/v1/user
 Content-Type: application/json
 
 {
-    "name": "Sergio Perez",
+    "name": "Sergio Checo",
+    "LastName": "Perez",
     "company": "Red Bull Racing",
     "address": "Guadalajara - Mexico",
     "phone": "3794-1234456",
@@ -23,7 +24,7 @@ Content-Type: application/json
 
 ### Get a user profile endpoint
 GET http://localhost:3001/v1/user
-authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVkYnVsbC5jb20iLCJpYXQiOjE2MjA5MTkyMzYsImV4cCI6MTYyMDkyMDEzNn0.-E-Krbz-q8ZzxdeNqhFFBOgPZRU2aNRL4X0PO17ZPKo
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVkYnVsbC5jb20iLCJpYXQiOjE2MjE5NDY1NTAsImV4cCI6MTYyMjAzMjk1MH0.mtc7P_KDLMytbF-re-0yQl-v1y15u4KIy2aDeEs8a20
 
 {
     "email": "checo11@redbull.com",
@@ -65,12 +66,12 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVk
 
 POST http://localhost:3001/v1/ticket
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVkYnVsbC5jb20iLCJpYXQiOjE2MjE2ODY3NTksImV4cCI6MTYyMTY4NzY1OX0.XV_cFzsM2PG_tabPmvhLNye9wpQJsBw3ReutcVuGHMw
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVkYnVsbC5jb20iLCJpYXQiOjE2MjE4MDM1NjcsImV4cCI6MTYyMTgwNDQ2N30.X08O3TwZKgBVzKrncQg5M8mNySiuehXUU_tiQYBts7o
 
 {
-    "subject": "Form Issue",
-    "sender": "Lewis",
-    "message": "Contact form not working. Please fix it as soon as posible"
+    "subject": "Rear Wings",
+    "sender": "Charles",
+    "message": "Contact to wardrail. Please fix it as soon as posible"
 }
 
 
@@ -85,12 +86,13 @@ authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVk
 
 
 
-### Update 
+### Reply message to the ticket
 PUT http://localhost:3001/v1/ticket/609405b450140323f4e09939
-authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVkYnVsbC5jb20iLCJpYXQiOjE2MjE2ODY3NTksImV4cCI6MTYyMTY4NzY1OX0.XV_cFzsM2PG_tabPmvhLNye9wpQJsBw3ReutcVuGHMw
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoZWNvMTFAcmVkYnVsbC5jb20iLCJpYXQiOjE2MjE2ODY3NTksImV4cCI6MTYyMTY4NzY1OX0.XV_cFzsM2PG_tabPmvhLNye9wpQJsBw3ReutcVuGHMw
 
 {
-    "message": "How is the fixing process. Please update me asap",
+    "message": "This is the 123 reply",
     "sender": "Lucca"
 }
 

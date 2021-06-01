@@ -7,6 +7,11 @@ const UserSchema = new Schema({
         maxlength: 50,
         required: true
     },
+    lastName: {
+        type: String,
+        maxlength: 50,
+        required: true
+    },
     company: {
         type: String,
         maxlength: 100
@@ -42,6 +47,11 @@ const UserSchema = new Schema({
             required: true,
             default: Date.now()
         }
+    },
+    isVerified: {
+        type: Boolean,
+        required: true,
+        default: false
     }
 });
 

@@ -4,9 +4,9 @@ const {storeUserRefreshJWT} = require('../model/user/User.model');
 const { PromiseProvider } = require('mongoose');
 
 const createAccessJWT = async (email, _id) => {
-
+//TODO: Modify expire time
     try {
-        const accessJWT = await jwt.sign({ email }, process.env.JWT_ACCESS_SECRET, {expiresIn: '15m'});
+        const accessJWT = await jwt.sign({ email }, process.env.JWT_ACCESS_SECRET, {expiresIn: '1d'});
         
         await setJWT(accessJWT, _id)
         return Promise.resolve(accessJWT)
